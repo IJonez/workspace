@@ -1,0 +1,732 @@
+
+Messschieber.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003e6  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000000a  00800060  000003e6  0000047a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000005a  0080006a  0080006a  00000484  2**0
+                  ALLOC
+  3 .debug_aranges 00000060  00000000  00000000  00000484  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 000001a5  00000000  00000000  000004e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000051a  00000000  00000000  00000689  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000282  00000000  00000000  00000ba3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000004bc  00000000  00000000  00000e25  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f0  00000000  00000000  000012e4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000001f7  00000000  00000000  000013d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000001e3  00000000  00000000  000015cb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	1d c0       	rjmp	.+58     	; 0x3c <__ctors_end>
+   2:	35 c0       	rjmp	.+106    	; 0x6e <__bad_interrupt>
+   4:	34 c0       	rjmp	.+104    	; 0x6e <__bad_interrupt>
+   6:	60 c0       	rjmp	.+192    	; 0xc8 <__vector_3>
+   8:	32 c0       	rjmp	.+100    	; 0x6e <__bad_interrupt>
+   a:	31 c0       	rjmp	.+98     	; 0x6e <__bad_interrupt>
+   c:	30 c0       	rjmp	.+96     	; 0x6e <__bad_interrupt>
+   e:	2f c0       	rjmp	.+94     	; 0x6e <__bad_interrupt>
+  10:	5d c1       	rjmp	.+698    	; 0x2cc <__vector_8>
+  12:	2d c0       	rjmp	.+90     	; 0x6e <__bad_interrupt>
+  14:	2c c0       	rjmp	.+88     	; 0x6e <__bad_interrupt>
+  16:	2b c0       	rjmp	.+86     	; 0x6e <__bad_interrupt>
+  18:	2a c0       	rjmp	.+84     	; 0x6e <__bad_interrupt>
+  1a:	29 c0       	rjmp	.+82     	; 0x6e <__bad_interrupt>
+  1c:	28 c0       	rjmp	.+80     	; 0x6e <__bad_interrupt>
+  1e:	27 c0       	rjmp	.+78     	; 0x6e <__bad_interrupt>
+  20:	26 c0       	rjmp	.+76     	; 0x6e <__bad_interrupt>
+  22:	25 c0       	rjmp	.+74     	; 0x6e <__bad_interrupt>
+  24:	24 c0       	rjmp	.+72     	; 0x6e <__bad_interrupt>
+
+00000026 <__c.1463>:
+  26:	41 54 74 69 6e 79 32 33 31 33 20 72 75 6e 6e 69     ATtiny2313 runni
+  36:	6e 67 0d 0a 00 00                                   ng....
+
+0000003c <__ctors_end>:
+  3c:	11 24       	eor	r1, r1
+  3e:	1f be       	out	0x3f, r1	; 63
+  40:	cf ed       	ldi	r28, 0xDF	; 223
+  42:	cd bf       	out	0x3d, r28	; 61
+
+00000044 <__do_copy_data>:
+  44:	10 e0       	ldi	r17, 0x00	; 0
+  46:	a0 e6       	ldi	r26, 0x60	; 96
+  48:	b0 e0       	ldi	r27, 0x00	; 0
+  4a:	e6 ee       	ldi	r30, 0xE6	; 230
+  4c:	f3 e0       	ldi	r31, 0x03	; 3
+  4e:	02 c0       	rjmp	.+4      	; 0x54 <.do_copy_data_start>
+
+00000050 <.do_copy_data_loop>:
+  50:	05 90       	lpm	r0, Z+
+  52:	0d 92       	st	X+, r0
+
+00000054 <.do_copy_data_start>:
+  54:	aa 36       	cpi	r26, 0x6A	; 106
+  56:	b1 07       	cpc	r27, r17
+  58:	d9 f7       	brne	.-10     	; 0x50 <.do_copy_data_loop>
+
+0000005a <__do_clear_bss>:
+  5a:	10 e0       	ldi	r17, 0x00	; 0
+  5c:	aa e6       	ldi	r26, 0x6A	; 106
+  5e:	b0 e0       	ldi	r27, 0x00	; 0
+  60:	01 c0       	rjmp	.+2      	; 0x64 <.do_clear_bss_start>
+
+00000062 <.do_clear_bss_loop>:
+  62:	1d 92       	st	X+, r1
+
+00000064 <.do_clear_bss_start>:
+  64:	a4 3c       	cpi	r26, 0xC4	; 196
+  66:	b1 07       	cpc	r27, r17
+  68:	e1 f7       	brne	.-8      	; 0x62 <.do_clear_bss_loop>
+  6a:	02 d0       	rcall	.+4      	; 0x70 <main>
+  6c:	ba c1       	rjmp	.+884    	; 0x3e2 <_exit>
+
+0000006e <__bad_interrupt>:
+  6e:	c8 cf       	rjmp	.-112    	; 0x0 <__vectors>
+
+00000070 <main>:
+
+char buffer[10];
+
+
+int main(void)
+{ RS232Init();  // serielle Schnittstelle initialisieren
+  70:	1f 93       	push	r17
+  72:	d4 d0       	rcall	.+424    	; 0x21c <RS232Init>
+  CaliperPORT |= CaliperClockMask | CaliperDataMask; //pull up einschalten
+  74:	82 b3       	in	r24, 0x12	; 18
+  76:	80 66       	ori	r24, 0x60	; 96
+  78:	82 bb       	out	0x12, r24	; 18
+  icpInit();    // ICP initialisieren
+  7a:	c8 d0       	rcall	.+400    	; 0x20c <icpInit>
+  sei();        // Interrupts freigeben
+  7c:	78 94       	sei
+
+
+
+  RS232XmitTxt("ATtiny2313 running" CR);
+  7e:	86 e2       	ldi	r24, 0x26	; 38
+  80:	90 e0       	ldi	r25, 0x00	; 0
+  82:	0f d1       	rcall	.+542    	; 0x2a2 <RS232XmitStr_P>
+
+  while(1)
+  { uint8_t tmpUnit;
+    int32_t tmpValue;
+  
+    if (CaliperUnit)              // es liegen neue Daten vor
+  84:	80 91 70 00 	lds	r24, 0x0070
+  88:	88 23       	and	r24, r24
+  8a:	e1 f3       	breq	.-8      	; 0x84 <main+0x14>
+    { cli();                      // während der Datenübergabe keine Unterbrechung zulassen
+  8c:	f8 94       	cli
+      tmpUnit  = CaliperUnit;     // Messdaten zwischenspeichern
+  8e:	10 91 70 00 	lds	r17, 0x0070
+      tmpValue = CaliperValue;
+  92:	60 91 6c 00 	lds	r22, 0x006C
+  96:	70 91 6d 00 	lds	r23, 0x006D
+  9a:	80 91 6e 00 	lds	r24, 0x006E
+  9e:	90 91 6f 00 	lds	r25, 0x006F
+      CaliperUnit = 0;            // Kennung auf gültigen Wert löschen
+  a2:	10 92 70 00 	sts	0x0070, r1
+      sei();                      // Datenübergabe vollständig
+  a6:	78 94       	sei
+
+      RS232XmitStr(ltoa(tmpValue, buffer, 10));
+  a8:	41 e7       	ldi	r20, 0x71	; 113
+  aa:	50 e0       	ldi	r21, 0x00	; 0
+  ac:	2a e0       	ldi	r18, 0x0A	; 10
+  ae:	30 e0       	ldi	r19, 0x00	; 0
+  b0:	34 d1       	rcall	.+616    	; 0x31a <ltoa>
+  b2:	eb d0       	rcall	.+470    	; 0x28a <RS232XmitStr>
+      if (tmpUnit == 2)
+  b4:	12 30       	cpi	r17, 0x02	; 2
+  b6:	19 f4       	brne	.+6      	; 0xbe <main+0x4e>
+      { RS232XmitStr(" inch");
+  b8:	80 e6       	ldi	r24, 0x60	; 96
+  ba:	90 e0       	ldi	r25, 0x00	; 0
+  bc:	02 c0       	rjmp	.+4      	; 0xc2 <main+0x52>
+      }
+      else
+      { RS232XmitStr(" mm");
+  be:	86 e6       	ldi	r24, 0x66	; 102
+  c0:	90 e0       	ldi	r25, 0x00	; 0
+  c2:	e3 d0       	rcall	.+454    	; 0x28a <RS232XmitStr>
+      }
+      RS232XmitCrLf();
+  c4:	dd d0       	rcall	.+442    	; 0x280 <RS232XmitCrLf>
+  c6:	de cf       	rjmp	.-68     	; 0x84 <main+0x14>
+
+000000c8 <__vector_3>:
+uint32_t     Input;  //Zwischenpuffer zum durchschieben der Bits
+uint8_t      InpCnt; //Anzahl eingelesener Bits
+
+
+ISR(TIMER1_CAPT_vect)
+{ uint8_t      t;
+  c8:	1f 92       	push	r1
+  ca:	0f 92       	push	r0
+  cc:	0f b6       	in	r0, 0x3f	; 63
+  ce:	0f 92       	push	r0
+  d0:	11 24       	eor	r1, r1
+  d2:	2f 93       	push	r18
+  d4:	3f 93       	push	r19
+  d6:	4f 93       	push	r20
+  d8:	5f 93       	push	r21
+  da:	6f 93       	push	r22
+  dc:	7f 93       	push	r23
+  de:	8f 93       	push	r24
+  e0:	9f 93       	push	r25
+  e2:	af 93       	push	r26
+  e4:	bf 93       	push	r27
+  uint8_t      tmp = CaliperPIN;                // Datenleitung sichern
+  e6:	20 b3       	in	r18, 0x10	; 16
+  icp_sample_t icr = ICP_ICR;		               // Timerstand sichern	
+  e8:	44 b5       	in	r20, 0x24	; 36
+  ea:	55 b5       	in	r21, 0x25	; 37
+
+  // hier kann der Interrupt unterbrochen werden
+  sei();
+  ec:	78 94       	sei
+
+  icp_sample_t icpPeriod = icr - icpStartTime;  // Pulslänge berechnen
+  ee:	80 91 7b 00 	lds	r24, 0x007B
+  f2:	90 91 7c 00 	lds	r25, 0x007C
+  f6:	ba 01       	movw	r22, r20
+  f8:	68 1b       	sub	r22, r24
+  fa:	79 0b       	sbc	r23, r25
+  fc:	cb 01       	movw	r24, r22
+  icpStartTime = icr;				               // Neue Startzeit merken 
+  fe:	50 93 7c 00 	sts	0x007C, r21
+ 102:	40 93 7b 00 	sts	0x007B, r20
+ 106:	22 95       	swap	r18
+ 108:	26 95       	lsr	r18
+ 10a:	27 70       	andi	r18, 0x07	; 7
+ 10c:	20 95       	com	r18
+ 10e:	21 70       	andi	r18, 0x01	; 1
+ 110:	30 e0       	ldi	r19, 0x00	; 0
+ 112:	40 e0       	ldi	r20, 0x00	; 0
+ 114:	50 e0       	ldi	r21, 0x00	; 0
+  else
+  { t = 1;
+  }
+
+
+  if (icpPeriod < 0x1600)                // kurze oder lange Pause? 0x1600 entpricht bei 16MHz etwa 2,5 mSec
+ 116:	80 50       	subi	r24, 0x00	; 0
+ 118:	96 41       	sbci	r25, 0x16	; 22
+ 11a:	08 f0       	brcs	.+2      	; 0x11e <__stack+0x3f>
+ 11c:	56 c0       	rjmp	.+172    	; 0x1ca <__stack+0xeb>
+  { Input = (Input >> 1) | ((uint32_t) t << 23); //alten Wert rechtsschieben, neues Bit einfügen (auf Position 24)
+ 11e:	77 e1       	ldi	r23, 0x17	; 23
+ 120:	22 0f       	add	r18, r18
+ 122:	33 1f       	adc	r19, r19
+ 124:	44 1f       	adc	r20, r20
+ 126:	55 1f       	adc	r21, r21
+ 128:	7a 95       	dec	r23
+ 12a:	d1 f7       	brne	.-12     	; 0x120 <__stack+0x41>
+ 12c:	80 91 80 00 	lds	r24, 0x0080
+ 130:	90 91 81 00 	lds	r25, 0x0081
+ 134:	a0 91 82 00 	lds	r26, 0x0082
+ 138:	b0 91 83 00 	lds	r27, 0x0083
+ 13c:	b6 95       	lsr	r27
+ 13e:	a7 95       	ror	r26
+ 140:	97 95       	ror	r25
+ 142:	87 95       	ror	r24
+ 144:	28 2b       	or	r18, r24
+ 146:	39 2b       	or	r19, r25
+ 148:	4a 2b       	or	r20, r26
+ 14a:	5b 2b       	or	r21, r27
+ 14c:	20 93 80 00 	sts	0x0080, r18
+ 150:	30 93 81 00 	sts	0x0081, r19
+ 154:	40 93 82 00 	sts	0x0082, r20
+ 158:	50 93 83 00 	sts	0x0083, r21
+    InpCnt++;                     // Bitzähler hochzählen
+ 15c:	80 91 7d 00 	lds	r24, 0x007D
+ 160:	8f 5f       	subi	r24, 0xFF	; 255
+ 162:	80 93 7d 00 	sts	0x007D, r24
+    if (InpCnt == 24)             // Alle Bits? Dann Ergebnis übertragen
+ 166:	88 31       	cpi	r24, 0x18	; 24
+ 168:	09 f0       	breq	.+2      	; 0x16c <__stack+0x8d>
+ 16a:	41 c0       	rjmp	.+130    	; 0x1ee <__stack+0x10f>
+    { cli();                      // während der Datenübergabe keine Unterbrechung zulassen
+ 16c:	f8 94       	cli
+      CaliperValue = Input & 0xFFFFF;
+ 16e:	da 01       	movw	r26, r20
+ 170:	c9 01       	movw	r24, r18
+ 172:	af 70       	andi	r26, 0x0F	; 15
+ 174:	b0 70       	andi	r27, 0x00	; 0
+ 176:	80 93 6c 00 	sts	0x006C, r24
+ 17a:	90 93 6d 00 	sts	0x006D, r25
+ 17e:	a0 93 6e 00 	sts	0x006E, r26
+ 182:	b0 93 6f 00 	sts	0x006F, r27
+      if (Input & 0x100000)
+ 186:	44 ff       	sbrs	r20, 4
+ 188:	17 c0       	rjmp	.+46     	; 0x1b8 <__stack+0xd9>
+      { CaliperValue = -CaliperValue;
+ 18a:	80 91 6c 00 	lds	r24, 0x006C
+ 18e:	90 91 6d 00 	lds	r25, 0x006D
+ 192:	a0 91 6e 00 	lds	r26, 0x006E
+ 196:	b0 91 6f 00 	lds	r27, 0x006F
+ 19a:	b0 95       	com	r27
+ 19c:	a0 95       	com	r26
+ 19e:	90 95       	com	r25
+ 1a0:	81 95       	neg	r24
+ 1a2:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1a4:	af 4f       	sbci	r26, 0xFF	; 255
+ 1a6:	bf 4f       	sbci	r27, 0xFF	; 255
+ 1a8:	80 93 6c 00 	sts	0x006C, r24
+ 1ac:	90 93 6d 00 	sts	0x006D, r25
+ 1b0:	a0 93 6e 00 	sts	0x006E, r26
+ 1b4:	b0 93 6f 00 	sts	0x006F, r27
+      }
+      if (Input & 0x800000)
+ 1b8:	47 ff       	sbrs	r20, 7
+ 1ba:	02 c0       	rjmp	.+4      	; 0x1c0 <__stack+0xe1>
+      { CaliperUnit = 2; // inch
+ 1bc:	82 e0       	ldi	r24, 0x02	; 2
+ 1be:	01 c0       	rjmp	.+2      	; 0x1c2 <__stack+0xe3>
+      }
+      else
+      { CaliperUnit = 1; // mm
+ 1c0:	81 e0       	ldi	r24, 0x01	; 1
+ 1c2:	80 93 70 00 	sts	0x0070, r24
+      }
+      sei();                      // Datenübergabe vollständig
+ 1c6:	78 94       	sei
+ 1c8:	12 c0       	rjmp	.+36     	; 0x1ee <__stack+0x10f>
+    }
+  }
+  else  // Neues Datenpaket
+  { Input = (uint32_t) t << 23;    // Zwischenspeicher initialisieren: 1. neue Bit auf Position 24
+ 1ca:	87 e1       	ldi	r24, 0x17	; 23
+ 1cc:	22 0f       	add	r18, r18
+ 1ce:	33 1f       	adc	r19, r19
+ 1d0:	44 1f       	adc	r20, r20
+ 1d2:	55 1f       	adc	r21, r21
+ 1d4:	8a 95       	dec	r24
+ 1d6:	d1 f7       	brne	.-12     	; 0x1cc <__stack+0xed>
+ 1d8:	20 93 80 00 	sts	0x0080, r18
+ 1dc:	30 93 81 00 	sts	0x0081, r19
+ 1e0:	40 93 82 00 	sts	0x0082, r20
+ 1e4:	50 93 83 00 	sts	0x0083, r21
+    InpCnt = 1;                    // Bitzähler auf 1
+ 1e8:	81 e0       	ldi	r24, 0x01	; 1
+ 1ea:	80 93 7d 00 	sts	0x007D, r24
+  }
+  return;
+}
+ 1ee:	bf 91       	pop	r27
+ 1f0:	af 91       	pop	r26
+ 1f2:	9f 91       	pop	r25
+ 1f4:	8f 91       	pop	r24
+ 1f6:	7f 91       	pop	r23
+ 1f8:	6f 91       	pop	r22
+ 1fa:	5f 91       	pop	r21
+ 1fc:	4f 91       	pop	r20
+ 1fe:	3f 91       	pop	r19
+ 200:	2f 91       	pop	r18
+ 202:	0f 90       	pop	r0
+ 204:	0f be       	out	0x3f, r0	; 63
+ 206:	0f 90       	pop	r0
+ 208:	1f 90       	pop	r1
+ 20a:	18 95       	reti
+
+0000020c <icpInit>:
+
+// Timer und Flags für den ICP vorbereiten
+void icpInit(void)
+{ ICP_CTL	= (0 << ICP_SENSE) | ICP_PRESCALE; //fallende Flanke und Prescaler
+ 20c:	82 e0       	ldi	r24, 0x02	; 2
+ 20e:	8e bd       	out	0x2e, r24	; 46
+
+
+  ICP_INTFLG = (1<<ICP_ICF); //evtl. eingetretene Interupts löschen
+ 210:	88 e0       	ldi	r24, 0x08	; 8
+ 212:	88 bf       	out	0x38, r24	; 56
+
+  ICP_TIMSK	|= (1<<ICP_IE); //Input Capture Interrupt zulassen
+ 214:	89 b7       	in	r24, 0x39	; 57
+ 216:	88 60       	ori	r24, 0x08	; 8
+ 218:	89 bf       	out	0x39, r24	; 57
+
+  return;
+}
+ 21a:	08 95       	ret
+
+0000021c <RS232Init>:
+   volatile uint8_t RS232_RxTail = 0;
+#endif
+
+
+void RS232Init()
+{ uint8_t sreg = SREG;
+ 21c:	9f b7       	in	r25, 0x3f	; 63
+  uint16_t ubrr = (uint16_t) ((uint32_t) F_CPU/(16* (uint32_t) RS232_BAUDRATE) - 1);
+
+  UBRRH = (uint8_t) (ubrr>>8);
+ 21e:	12 b8       	out	0x02, r1	; 2
+  UBRRL = (uint8_t) (ubrr);
+ 220:	80 e1       	ldi	r24, 0x10	; 16
+ 222:	89 b9       	out	0x09, r24	; 9
+
+
+  // Interrupts kurz deaktivieren 
+  cli();
+ 224:	f8 94       	cli
+#endif
+
+  // RS232 Receiver und Transmitter anschalten, Receive-Interrupt aktivieren 
+  // Data mode 8N1, asynchron
+
+  UCSRB = TX_ENABLE | RX_ENABLE;
+ 226:	88 e0       	ldi	r24, 0x08	; 8
+ 228:	8a b9       	out	0x0a, r24	; 10
+#if defined (__AVR_ATmega8__)
+  UCSRC = (1 << URSEL) | (1 << UCSZ1) | (1 << UCSZ0);
+#elif defined (__AVR_ATtiny2313__)
+  UCSRC = (1 << UCSZ1) | (1 << UCSZ0);
+ 22a:	86 e0       	ldi	r24, 0x06	; 6
+ 22c:	83 b9       	out	0x03, r24	; 3
+#endif
+
+  // Flush Receive-Buffer (entfernen evtl. vorhandener ungültiger Werte) 
+  do
+    { // UDR auslesen (Wert wird nicht verwendet) 
+      UDR;
+ 22e:	8c b1       	in	r24, 0x0c	; 12
+    }
+    while (UCSRA & (1 << RXC));
+ 230:	5f 99       	sbic	0x0b, 7	; 11
+ 232:	fd cf       	rjmp	.-6      	; 0x22e <RS232Init+0x12>
+
+  // Rücksetzen von Receive und Transmit Complete-Flags 
+  UCSRA = (1 << RXC) | (1 << TXC);
+ 234:	80 ec       	ldi	r24, 0xC0	; 192
+ 236:	8b b9       	out	0x0b, r24	; 11
+
+  // Global Interrupt-Flag wieder herstellen 
+  SREG = sreg;
+ 238:	9f bf       	out	0x3f, r25	; 63
+
+  // FIFOs für Ein- und Ausgabe initialisieren 
+//  ClearRS232TxBuffer();
+//  ClearRS232RxBuffer();
+}
+ 23a:	08 95       	ret
+
+0000023c <RS232Xmit>:
+#if RS232_TX_BUFFER_SIZE > 0
+
+// Stellt ein Byte in den Übertragungspuffer.
+// Wartet, wenn der Puffer voll ist.
+void RS232Xmit(uint8_t data)
+{ unsigned char tmphead;
+ 23c:	28 2f       	mov	r18, r24
+
+  tmphead = (RS232_TxHead + 1) & RS232_TX_BUFFER_MASK;       // Puffer-Index berechnen
+ 23e:	90 91 6a 00 	lds	r25, 0x006A
+ 242:	9f 5f       	subi	r25, 0xFF	; 255
+ 244:	9f 73       	andi	r25, 0x3F	; 63
+  while ( tmphead == RS232_TxTail );                         // Warten bis freie Speicherplätze vorhanden sind.
+ 246:	80 91 6b 00 	lds	r24, 0x006B
+ 24a:	98 17       	cp	r25, r24
+ 24c:	e1 f3       	breq	.-8      	; 0x246 <RS232Xmit+0xa>
+  RS232_TxBuf[tmphead] = data;                               // Datenbyte speichern.
+ 24e:	e9 2f       	mov	r30, r25
+ 250:	f0 e0       	ldi	r31, 0x00	; 0
+ 252:	ec 57       	subi	r30, 0x7C	; 124
+ 254:	ff 4f       	sbci	r31, 0xFF	; 255
+ 256:	20 83       	st	Z, r18
+  RS232_TxHead = tmphead;                                    // Index speichern
+ 258:	90 93 6a 00 	sts	0x006A, r25
+  UCSRB |= (1 << UDRIE);                                     // Interrupt freigeben  
+ 25c:	55 9a       	sbi	0x0a, 5	; 10
+}
+ 25e:	08 95       	ret
+
+00000260 <XmitNibble>:
+
+
+void XmitNibble(uint8_t n) //Private Funktion
+{ uint8_t d = n + 0x30;
+ 260:	80 5d       	subi	r24, 0xD0	; 208
+  if (d > 0x39)
+ 262:	8a 33       	cpi	r24, 0x3A	; 58
+ 264:	08 f0       	brcs	.+2      	; 0x268 <XmitNibble+0x8>
+     d += 7;
+ 266:	89 5f       	subi	r24, 0xF9	; 249
+  RS232Xmit(d);
+ 268:	e9 df       	rcall	.-46     	; 0x23c <RS232Xmit>
+}
+ 26a:	08 95       	ret
+
+0000026c <RS232XmitHex>:
+
+void RS232XmitHex(uint8_t data)
+{ XmitNibble(data >> 4);
+ 26c:	1f 93       	push	r17
+ 26e:	18 2f       	mov	r17, r24
+ 270:	82 95       	swap	r24
+ 272:	8f 70       	andi	r24, 0x0F	; 15
+ 274:	f5 df       	rcall	.-22     	; 0x260 <XmitNibble>
+  XmitNibble(data & 0x0F);
+ 276:	81 2f       	mov	r24, r17
+ 278:	8f 70       	andi	r24, 0x0F	; 15
+ 27a:	f2 df       	rcall	.-28     	; 0x260 <XmitNibble>
+}
+ 27c:	1f 91       	pop	r17
+ 27e:	08 95       	ret
+
+00000280 <RS232XmitCrLf>:
+
+
+void RS232XmitCrLf(void)
+{ RS232Xmit(13); 
+ 280:	8d e0       	ldi	r24, 0x0D	; 13
+ 282:	dc df       	rcall	.-72     	; 0x23c <RS232Xmit>
+  RS232Xmit(10);
+ 284:	8a e0       	ldi	r24, 0x0A	; 10
+ 286:	da df       	rcall	.-76     	; 0x23c <RS232Xmit>
+}
+ 288:	08 95       	ret
+
+0000028a <RS232XmitStr>:
+
+void RS232XmitStr(const char *data)
+{ while (*data)
+ 28a:	cf 93       	push	r28
+ 28c:	df 93       	push	r29
+ 28e:	ec 01       	movw	r28, r24
+ 290:	02 c0       	rjmp	.+4      	; 0x296 <RS232XmitStr+0xc>
+    RS232Xmit(*data++);
+ 292:	21 96       	adiw	r28, 0x01	; 1
+ 294:	d3 df       	rcall	.-90     	; 0x23c <RS232Xmit>
+{ RS232Xmit(13); 
+  RS232Xmit(10);
+}
+
+void RS232XmitStr(const char *data)
+{ while (*data)
+ 296:	88 81       	ld	r24, Y
+ 298:	88 23       	and	r24, r24
+ 29a:	d9 f7       	brne	.-10     	; 0x292 <RS232XmitStr+0x8>
+    RS232Xmit(*data++);
+}
+ 29c:	df 91       	pop	r29
+ 29e:	cf 91       	pop	r28
+ 2a0:	08 95       	ret
+
+000002a2 <RS232XmitStr_P>:
+
+void RS232XmitStr_P(const char *data)
+{ while (pgm_read_byte(data) != 0x00)
+ 2a2:	cf 93       	push	r28
+ 2a4:	df 93       	push	r29
+ 2a6:	ec 01       	movw	r28, r24
+ 2a8:	04 c0       	rjmp	.+8      	; 0x2b2 <RS232XmitStr_P+0x10>
+    RS232Xmit(pgm_read_byte(data++));
+ 2aa:	21 96       	adiw	r28, 0x01	; 1
+ 2ac:	f9 01       	movw	r30, r18
+ 2ae:	84 91       	lpm	r24, Z+
+ 2b0:	c5 df       	rcall	.-118    	; 0x23c <RS232Xmit>
+ 2b2:	9e 01       	movw	r18, r28
+{ while (*data)
+    RS232Xmit(*data++);
+}
+
+void RS232XmitStr_P(const char *data)
+{ while (pgm_read_byte(data) != 0x00)
+ 2b4:	fe 01       	movw	r30, r28
+ 2b6:	84 91       	lpm	r24, Z+
+ 2b8:	88 23       	and	r24, r24
+ 2ba:	b9 f7       	brne	.-18     	; 0x2aa <RS232XmitStr_P+0x8>
+    RS232Xmit(pgm_read_byte(data++));
+}
+ 2bc:	df 91       	pop	r29
+ 2be:	cf 91       	pop	r28
+ 2c0:	08 95       	ret
+
+000002c2 <ClearRS232TxBuffer>:
+
+void ClearRS232TxBuffer(void)
+{ RS232_TxTail = 0;
+ 2c2:	10 92 6b 00 	sts	0x006B, r1
+  RS232_TxHead = 0;
+ 2c6:	10 92 6a 00 	sts	0x006A, r1
+}
+ 2ca:	08 95       	ret
+
+000002cc <__vector_8>:
+
+// Ein Zeichen aus der Ausgabe-FIFO lesen und ausgeben 
+// Ist das Zeichen fertig ausgegeben, wird ein neuer SIG_RS232_DATA-IRQ getriggert 
+// Ist die FIFO leer, deaktiviert die ISR ihren eigenen IRQ. 
+SIGNAL (SIG_USART0_DATA)
+{ if (RS232_TxHead != RS232_TxTail)       // Es sind Daten vorhanden
+ 2cc:	1f 92       	push	r1
+ 2ce:	0f 92       	push	r0
+ 2d0:	0f b6       	in	r0, 0x3f	; 63
+ 2d2:	0f 92       	push	r0
+ 2d4:	11 24       	eor	r1, r1
+ 2d6:	8f 93       	push	r24
+ 2d8:	9f 93       	push	r25
+ 2da:	ef 93       	push	r30
+ 2dc:	ff 93       	push	r31
+ 2de:	90 91 6a 00 	lds	r25, 0x006A
+ 2e2:	80 91 6b 00 	lds	r24, 0x006B
+ 2e6:	98 17       	cp	r25, r24
+ 2e8:	71 f0       	breq	.+28     	; 0x306 <__vector_8+0x3a>
+  { RS232_TxTail = ( RS232_TxTail + 1 ) & RS232_TX_BUFFER_MASK;
+ 2ea:	80 91 6b 00 	lds	r24, 0x006B
+ 2ee:	8f 5f       	subi	r24, 0xFF	; 255
+ 2f0:	8f 73       	andi	r24, 0x3F	; 63
+ 2f2:	80 93 6b 00 	sts	0x006B, r24
+    UDR = RS232_TxBuf[RS232_TxTail];
+ 2f6:	e0 91 6b 00 	lds	r30, 0x006B
+ 2fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 2fc:	ec 57       	subi	r30, 0x7C	; 124
+ 2fe:	ff 4f       	sbci	r31, 0xFF	; 255
+ 300:	80 81       	ld	r24, Z
+ 302:	8c b9       	out	0x0c, r24	; 12
+ 304:	01 c0       	rjmp	.+2      	; 0x308 <__vector_8+0x3c>
+  }
+  else
+    UCSRB &= ~(1 << UDRIE);
+ 306:	55 98       	cbi	0x0a, 5	; 10
+}
+ 308:	ff 91       	pop	r31
+ 30a:	ef 91       	pop	r30
+ 30c:	9f 91       	pop	r25
+ 30e:	8f 91       	pop	r24
+ 310:	0f 90       	pop	r0
+ 312:	0f be       	out	0x3f, r0	; 63
+ 314:	0f 90       	pop	r0
+ 316:	1f 90       	pop	r1
+ 318:	18 95       	reti
+
+0000031a <ltoa>:
+ 31a:	fa 01       	movw	r30, r20
+ 31c:	cf 93       	push	r28
+ 31e:	ff 93       	push	r31
+ 320:	ef 93       	push	r30
+ 322:	22 30       	cpi	r18, 0x02	; 2
+ 324:	3c f1       	brlt	.+78     	; 0x374 <ltoa+0x5a>
+ 326:	25 32       	cpi	r18, 0x25	; 37
+ 328:	2c f5       	brge	.+74     	; 0x374 <ltoa+0x5a>
+ 32a:	c2 2f       	mov	r28, r18
+ 32c:	e8 94       	clt
+ 32e:	ca 30       	cpi	r28, 0x0A	; 10
+ 330:	49 f4       	brne	.+18     	; 0x344 <ltoa+0x2a>
+ 332:	97 fb       	bst	r25, 7
+ 334:	3e f4       	brtc	.+14     	; 0x344 <ltoa+0x2a>
+ 336:	90 95       	com	r25
+ 338:	80 95       	com	r24
+ 33a:	70 95       	com	r23
+ 33c:	61 95       	neg	r22
+ 33e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 340:	8f 4f       	sbci	r24, 0xFF	; 255
+ 342:	9f 4f       	sbci	r25, 0xFF	; 255
+ 344:	2c 2f       	mov	r18, r28
+ 346:	33 27       	eor	r19, r19
+ 348:	44 27       	eor	r20, r20
+ 34a:	55 27       	eor	r21, r21
+ 34c:	ff 93       	push	r31
+ 34e:	ef 93       	push	r30
+ 350:	26 d0       	rcall	.+76     	; 0x39e <__udivmodsi4>
+ 352:	ef 91       	pop	r30
+ 354:	ff 91       	pop	r31
+ 356:	60 5d       	subi	r22, 0xD0	; 208
+ 358:	6a 33       	cpi	r22, 0x3A	; 58
+ 35a:	0c f0       	brlt	.+2      	; 0x35e <ltoa+0x44>
+ 35c:	69 5d       	subi	r22, 0xD9	; 217
+ 35e:	61 93       	st	Z+, r22
+ 360:	b9 01       	movw	r22, r18
+ 362:	ca 01       	movw	r24, r20
+ 364:	60 50       	subi	r22, 0x00	; 0
+ 366:	70 40       	sbci	r23, 0x00	; 0
+ 368:	80 40       	sbci	r24, 0x00	; 0
+ 36a:	90 40       	sbci	r25, 0x00	; 0
+ 36c:	59 f7       	brne	.-42     	; 0x344 <ltoa+0x2a>
+ 36e:	16 f4       	brtc	.+4      	; 0x374 <ltoa+0x5a>
+ 370:	cd e2       	ldi	r28, 0x2D	; 45
+ 372:	c1 93       	st	Z+, r28
+ 374:	10 82       	st	Z, r1
+ 376:	8f 91       	pop	r24
+ 378:	9f 91       	pop	r25
+ 37a:	cf 91       	pop	r28
+ 37c:	00 c0       	rjmp	.+0      	; 0x37e <strrev>
+
+0000037e <strrev>:
+ 37e:	dc 01       	movw	r26, r24
+ 380:	fc 01       	movw	r30, r24
+ 382:	67 2f       	mov	r22, r23
+ 384:	71 91       	ld	r23, Z+
+ 386:	77 23       	and	r23, r23
+ 388:	e1 f7       	brne	.-8      	; 0x382 <strrev+0x4>
+ 38a:	32 97       	sbiw	r30, 0x02	; 2
+ 38c:	04 c0       	rjmp	.+8      	; 0x396 <strrev+0x18>
+ 38e:	7c 91       	ld	r23, X
+ 390:	6d 93       	st	X+, r22
+ 392:	70 83       	st	Z, r23
+ 394:	62 91       	ld	r22, -Z
+ 396:	ae 17       	cp	r26, r30
+ 398:	bf 07       	cpc	r27, r31
+ 39a:	c8 f3       	brcs	.-14     	; 0x38e <strrev+0x10>
+ 39c:	08 95       	ret
+
+0000039e <__udivmodsi4>:
+ 39e:	a1 e2       	ldi	r26, 0x21	; 33
+ 3a0:	1a 2e       	mov	r1, r26
+ 3a2:	aa 1b       	sub	r26, r26
+ 3a4:	bb 1b       	sub	r27, r27
+ 3a6:	fd 01       	movw	r30, r26
+ 3a8:	0d c0       	rjmp	.+26     	; 0x3c4 <__udivmodsi4_ep>
+
+000003aa <__udivmodsi4_loop>:
+ 3aa:	aa 1f       	adc	r26, r26
+ 3ac:	bb 1f       	adc	r27, r27
+ 3ae:	ee 1f       	adc	r30, r30
+ 3b0:	ff 1f       	adc	r31, r31
+ 3b2:	a2 17       	cp	r26, r18
+ 3b4:	b3 07       	cpc	r27, r19
+ 3b6:	e4 07       	cpc	r30, r20
+ 3b8:	f5 07       	cpc	r31, r21
+ 3ba:	20 f0       	brcs	.+8      	; 0x3c4 <__udivmodsi4_ep>
+ 3bc:	a2 1b       	sub	r26, r18
+ 3be:	b3 0b       	sbc	r27, r19
+ 3c0:	e4 0b       	sbc	r30, r20
+ 3c2:	f5 0b       	sbc	r31, r21
+
+000003c4 <__udivmodsi4_ep>:
+ 3c4:	66 1f       	adc	r22, r22
+ 3c6:	77 1f       	adc	r23, r23
+ 3c8:	88 1f       	adc	r24, r24
+ 3ca:	99 1f       	adc	r25, r25
+ 3cc:	1a 94       	dec	r1
+ 3ce:	69 f7       	brne	.-38     	; 0x3aa <__udivmodsi4_loop>
+ 3d0:	60 95       	com	r22
+ 3d2:	70 95       	com	r23
+ 3d4:	80 95       	com	r24
+ 3d6:	90 95       	com	r25
+ 3d8:	9b 01       	movw	r18, r22
+ 3da:	ac 01       	movw	r20, r24
+ 3dc:	bd 01       	movw	r22, r26
+ 3de:	cf 01       	movw	r24, r30
+ 3e0:	08 95       	ret
+
+000003e2 <_exit>:
+ 3e2:	f8 94       	cli
+
+000003e4 <__stop_program>:
+ 3e4:	ff cf       	rjmp	.-2      	; 0x3e4 <__stop_program>

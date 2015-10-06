@@ -1,0 +1,20 @@
+17:55:59 **** Incremental Build of configuration Release for project button ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 button.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:     144 bytes (0.9% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+17:56:00 Build Finished (took 123ms)
+

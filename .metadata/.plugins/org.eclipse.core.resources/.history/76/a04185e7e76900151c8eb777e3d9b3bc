@@ -1,0 +1,107 @@
+/*
+ * main.c
+ *
+ *  Created on: 03.10.2015
+ *      Author: db2442s
+ */
+
+#include <avr/io.h>
+#include <stdint.h>
+#include <util/delay.h>
+
+/*
+  UART-Init:
+Berechnung des Wertes für das Baudratenregister
+aus Taktrate und gewünschter Baudrate
+*/
+
+#ifndef F_CPU
+/* In neueren Version der WinAVR/Mfile Makefile-Vorlage kann
+   F_CPU im Makefile definiert werden, eine nochmalige Definition
+   hier wuerde zu einer Compilerwarnung fuehren. Daher "Schutz" durch
+   #ifndef/#endif
+
+   Dieser "Schutz" kann zu Debugsessions führen, wenn AVRStudio
+   verwendet wird und dort eine andere, nicht zur Hardware passende
+   Taktrate eingestellt ist: Dann wird die folgende Definition
+   nicht verwendet, sondern stattdessen der Defaultwert (8 MHz?)
+   von AVRStudio - daher Ausgabe einer Warnung falls F_CPU
+   noch nicht definiert: */
+#warning "F_CPU war noch nicht definiert, wird nun nachgeholt mit 8000000"
+#define F_CPU 8000000UL  // Systemtakt in Hz - Definition als unsigned long beachten
+                         // Ohne ergeben sich unten Fehler in der Berechnung
+#endif
+
+#define BAUD 9600UL      // Baudrate
+
+// Berechnungen
+#define UBRR_VAL ((F_CPU+BAUD*8)/(BAUD*16)-1)   // clever runden
+#define BAUD_REAL (F_CPU/(16*(UBRR_VAL+1)))     // Reale Baudrate
+#define BAUD_ERROR ((BAUD_REAL*1000)/BAUD) // Fehler in Promille, 1000 = kein Fehler.
+
+#if ((BAUD_ERROR<990) || (BAUD_ERROR>1010))
+  #error Systematischer Fehler der Baudrate grösser 1% und damit zu hoch!
+#endif
+
+/* UART-Init Bsp. ATmega8 */
+
+void USART_Init(ubrr)
+{
+	/*
+	Set baud rate
+	 */
+	UBRRH = (ubrr>>8);
+	UBRRL = (ubrr & 0xFF);
+	/*
+	Enable receiver and transmitter
+	 */
+	UCSRB = (1<<RXEN)|(1<<TXEN);
+	/*
+	Set frame format: 8data, 2stop bit
+	 */
+	UCSRC = (1<<URSEL)|(1<<USBS)|(3<<UCSZ0);
+}
+
+/* ATmega16 */
+int uart_putc(unsigned char c)
+{
+    while (!(UCSRA & (1<<UDRE)))  /* warten bis Senden moeglich */
+    {
+    }
+
+    UDR = c;                      /* sende Zeichen */
+    return 0;
+}
+
+
+/* puts ist unabhaengig vom Controllertyp */
+void uart_puts (char *s)
+{
+    while (*s)
+    {   /* so lange *s != '\0' also ungleich dem "String-Endezeichen(Terminator)" */
+        uart_putc(*s);
+        s++;
+    }
+}
+
+int main(void)
+{
+	DDRD = 0xff;
+	DDRD |= (1 << PD6);
+
+	USART_Init(UBRR_VAL);
+
+	PORTD |= (1 << PD6);
+	_delay_ms(1000);
+	PORTD &= ~(1 << PD6);
+
+	while(1)
+	{
+		uart_puts ('Hallo');
+		_delay_ms(500);
+		PORTD |= (1 << PD6);
+		_delay_ms(1000);
+		PORTD &= ~(1 << PD6);
+
+	}
+}

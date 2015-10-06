@@ -1,0 +1,20 @@
+17:09:55 **** Incremental Build of configuration Release for project LedBlinky ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega8 LedBlinky.elf
+AVR Memory Usage
+----------------
+Device: atmega8
+
+Program:     100 bytes (1.2% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+17:09:55 Build Finished (took 126ms)
+

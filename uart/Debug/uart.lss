@@ -1,0 +1,267 @@
+
+uart.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000015a  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  0000015a  000001ee  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000002  00800062  00800062  000001f0  2**0
+                  ALLOC
+  3 .stab         0000051c  00000000  00000000  000001f0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      000008d6  00000000  00000000  0000070c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	19 c0       	rjmp	.+50     	; 0x34 <__ctors_end>
+   2:	33 c0       	rjmp	.+102    	; 0x6a <__bad_interrupt>
+   4:	32 c0       	rjmp	.+100    	; 0x6a <__bad_interrupt>
+   6:	31 c0       	rjmp	.+98     	; 0x6a <__bad_interrupt>
+   8:	30 c0       	rjmp	.+96     	; 0x6a <__bad_interrupt>
+   a:	2f c0       	rjmp	.+94     	; 0x6a <__bad_interrupt>
+   c:	2e c0       	rjmp	.+92     	; 0x6a <__bad_interrupt>
+   e:	2d c0       	rjmp	.+90     	; 0x6a <__bad_interrupt>
+  10:	2c c0       	rjmp	.+88     	; 0x6a <__bad_interrupt>
+  12:	2b c0       	rjmp	.+86     	; 0x6a <__bad_interrupt>
+  14:	2a c0       	rjmp	.+84     	; 0x6a <__bad_interrupt>
+  16:	29 c0       	rjmp	.+82     	; 0x6a <__bad_interrupt>
+  18:	59 c0       	rjmp	.+178    	; 0xcc <__vector_12>
+  1a:	27 c0       	rjmp	.+78     	; 0x6a <__bad_interrupt>
+  1c:	26 c0       	rjmp	.+76     	; 0x6a <__bad_interrupt>
+  1e:	25 c0       	rjmp	.+74     	; 0x6a <__bad_interrupt>
+  20:	24 c0       	rjmp	.+72     	; 0x6a <__bad_interrupt>
+  22:	23 c0       	rjmp	.+70     	; 0x6a <__bad_interrupt>
+  24:	22 c0       	rjmp	.+68     	; 0x6a <__bad_interrupt>
+
+00000026 <daten>:
+  26:	48 65 6c 6c 6f 20 57 6f 72 6c 64 21 0a 00           Hello World!..
+
+00000034 <__ctors_end>:
+  34:	11 24       	eor	r1, r1
+  36:	1f be       	out	0x3f, r1	; 63
+  38:	cf e5       	ldi	r28, 0x5F	; 95
+  3a:	d4 e0       	ldi	r29, 0x04	; 4
+  3c:	de bf       	out	0x3e, r29	; 62
+  3e:	cd bf       	out	0x3d, r28	; 61
+
+00000040 <__do_copy_data>:
+  40:	10 e0       	ldi	r17, 0x00	; 0
+  42:	a0 e6       	ldi	r26, 0x60	; 96
+  44:	b0 e0       	ldi	r27, 0x00	; 0
+  46:	ea e5       	ldi	r30, 0x5A	; 90
+  48:	f1 e0       	ldi	r31, 0x01	; 1
+  4a:	02 c0       	rjmp	.+4      	; 0x50 <.do_copy_data_start>
+
+0000004c <.do_copy_data_loop>:
+  4c:	05 90       	lpm	r0, Z+
+  4e:	0d 92       	st	X+, r0
+
+00000050 <.do_copy_data_start>:
+  50:	a2 36       	cpi	r26, 0x62	; 98
+  52:	b1 07       	cpc	r27, r17
+  54:	d9 f7       	brne	.-10     	; 0x4c <.do_copy_data_loop>
+
+00000056 <__do_clear_bss>:
+  56:	10 e0       	ldi	r17, 0x00	; 0
+  58:	a2 e6       	ldi	r26, 0x62	; 98
+  5a:	b0 e0       	ldi	r27, 0x00	; 0
+  5c:	01 c0       	rjmp	.+2      	; 0x60 <.do_clear_bss_start>
+
+0000005e <.do_clear_bss_loop>:
+  5e:	1d 92       	st	X+, r1
+
+00000060 <.do_clear_bss_start>:
+  60:	a4 36       	cpi	r26, 0x64	; 100
+  62:	b1 07       	cpc	r27, r17
+  64:	e1 f7       	brne	.-8      	; 0x5e <.do_clear_bss_loop>
+  66:	18 d0       	rcall	.+48     	; 0x98 <main>
+  68:	76 c0       	rjmp	.+236    	; 0x156 <_exit>
+
+0000006a <__bad_interrupt>:
+  6a:	ca cf       	rjmp	.-108    	; 0x0 <__vectors>
+
+0000006c <uart_init>:
+
+
+// USART initialisieren
+void
+uart_init(void)
+{
+  6c:	df 93       	push	r29
+  6e:	cf 93       	push	r28
+  70:	cd b7       	in	r28, 0x3d	; 61
+  72:	de b7       	in	r29, 0x3e	; 62
+    // Baudrate einstellen ( Normaler Modus )
+    UBRRH = (unsigned char) (UBRR_BAUD>>8);
+  74:	e0 e4       	ldi	r30, 0x40	; 64
+  76:	f0 e0       	ldi	r31, 0x00	; 0
+  78:	10 82       	st	Z, r1
+    UBRRL = (unsigned char) (UBRR_BAUD & 0x0ff);
+  7a:	e9 e2       	ldi	r30, 0x29	; 41
+  7c:	f0 e0       	ldi	r31, 0x00	; 0
+  7e:	89 e1       	ldi	r24, 0x19	; 25
+  80:	80 83       	st	Z, r24
+
+    // oder einfacher:
+    // UBRR = UBRR_BAUD;
+
+    // Aktivieren des Empfängers, des Senders und des "Daten empfangen"-Interrupts
+    UCSRB = (1<<RXEN)|(1<<TXEN);
+  82:	ea e2       	ldi	r30, 0x2A	; 42
+  84:	f0 e0       	ldi	r31, 0x00	; 0
+  86:	88 e1       	ldi	r24, 0x18	; 24
+  88:	80 83       	st	Z, r24
+
+    // Einstellen des Datenformats: 8 Datenbits, 1 Stoppbit
+    UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);
+  8a:	e0 e4       	ldi	r30, 0x40	; 64
+  8c:	f0 e0       	ldi	r31, 0x00	; 0
+  8e:	86 e8       	ldi	r24, 0x86	; 134
+  90:	80 83       	st	Z, r24
+}
+  92:	cf 91       	pop	r28
+  94:	df 91       	pop	r29
+  96:	08 95       	ret
+
+00000098 <main>:
+
+int
+main(void)
+{
+  98:	df 93       	push	r29
+  9a:	cf 93       	push	r28
+  9c:	cd b7       	in	r28, 0x3d	; 61
+  9e:	de b7       	in	r29, 0x3e	; 62
+    // USART initialisieren
+    uart_init();
+  a0:	e5 df       	rcall	.-54     	; 0x6c <uart_init>
+
+    sei();
+  a2:	78 94       	sei
+
+    while (1)
+    {
+        if (daten_gesendet)
+  a4:	80 91 60 00 	lds	r24, 0x0060
+  a8:	88 23       	and	r24, r24
+  aa:	e1 f3       	breq	.-8      	; 0xa4 <main+0xc>
+        {
+            // Flag zurücksetzen
+            daten_gesendet = FALSE;
+  ac:	10 92 60 00 	sts	0x0060, r1
+
+            // Pointer zeigt auf die Daten im Flashspeicher
+            p_string = daten;
+  b0:	86 e2       	ldi	r24, 0x26	; 38
+  b2:	90 e0       	ldi	r25, 0x00	; 0
+  b4:	90 93 63 00 	sts	0x0063, r25
+  b8:	80 93 62 00 	sts	0x0062, r24
+
+            /* Interrupt aktivieren, damit wird sofort zur
+               Interruptroutine gesprungen und das erste Zeichen gesendet. */
+            UCSRB |= (1<<UDRIE);
+  bc:	aa e2       	ldi	r26, 0x2A	; 42
+  be:	b0 e0       	ldi	r27, 0x00	; 0
+  c0:	ea e2       	ldi	r30, 0x2A	; 42
+  c2:	f0 e0       	ldi	r31, 0x00	; 0
+  c4:	80 81       	ld	r24, Z
+  c6:	80 62       	ori	r24, 0x20	; 32
+  c8:	8c 93       	st	X, r24
+  ca:	ec cf       	rjmp	.-40     	; 0xa4 <main+0xc>
+
+000000cc <__vector_12>:
+    }
+}
+
+// Interrupt wird ausgelöst sobald der Sendepuffer leer ist
+ISR(USART_UDRE_vect)
+{
+  cc:	1f 92       	push	r1
+  ce:	0f 92       	push	r0
+  d0:	0f b6       	in	r0, 0x3f	; 63
+  d2:	0f 92       	push	r0
+  d4:	11 24       	eor	r1, r1
+  d6:	8f 93       	push	r24
+  d8:	9f 93       	push	r25
+  da:	af 93       	push	r26
+  dc:	bf 93       	push	r27
+  de:	ef 93       	push	r30
+  e0:	ff 93       	push	r31
+  e2:	df 93       	push	r29
+  e4:	cf 93       	push	r28
+  e6:	00 d0       	rcall	.+0      	; 0xe8 <__vector_12+0x1c>
+  e8:	00 d0       	rcall	.+0      	; 0xea <__vector_12+0x1e>
+  ea:	cd b7       	in	r28, 0x3d	; 61
+  ec:	de b7       	in	r29, 0x3e	; 62
+    char buffer = pgm_read_byte(p_string++);
+  ee:	80 91 62 00 	lds	r24, 0x0062
+  f2:	90 91 63 00 	lds	r25, 0x0063
+  f6:	9b 83       	std	Y+3, r25	; 0x03
+  f8:	8a 83       	std	Y+2, r24	; 0x02
+  fa:	01 96       	adiw	r24, 0x01	; 1
+  fc:	90 93 63 00 	sts	0x0063, r25
+ 100:	80 93 62 00 	sts	0x0062, r24
+ 104:	ea 81       	ldd	r30, Y+2	; 0x02
+ 106:	fb 81       	ldd	r31, Y+3	; 0x03
+ 108:	84 91       	lpm	r24, Z+
+ 10a:	89 83       	std	Y+1, r24	; 0x01
+ 10c:	89 81       	ldd	r24, Y+1	; 0x01
+ 10e:	8c 83       	std	Y+4, r24	; 0x04
+
+    /* Wenn nicht das Ende der Zeichenkette erreicht wurde,
+       dann weiteres Zeichen senden */
+    if ( buffer != '\0' ) {
+ 110:	8c 81       	ldd	r24, Y+4	; 0x04
+ 112:	88 23       	and	r24, r24
+ 114:	29 f0       	breq	.+10     	; 0x120 <__vector_12+0x54>
+        UDR = buffer;
+ 116:	ec e2       	ldi	r30, 0x2C	; 44
+ 118:	f0 e0       	ldi	r31, 0x00	; 0
+ 11a:	8c 81       	ldd	r24, Y+4	; 0x04
+ 11c:	80 83       	st	Z, r24
+ 11e:	0a c0       	rjmp	.+20     	; 0x134 <__vector_12+0x68>
+
+    } else {
+        // Flag setzen, das der String gesendet wurde
+        daten_gesendet = TRUE;
+ 120:	81 e0       	ldi	r24, 0x01	; 1
+ 122:	80 93 60 00 	sts	0x0060, r24
+
+        // Interrupt deaktivieren
+        UCSRB &= ~(1<<UDRIE);
+ 126:	aa e2       	ldi	r26, 0x2A	; 42
+ 128:	b0 e0       	ldi	r27, 0x00	; 0
+ 12a:	ea e2       	ldi	r30, 0x2A	; 42
+ 12c:	f0 e0       	ldi	r31, 0x00	; 0
+ 12e:	80 81       	ld	r24, Z
+ 130:	8f 7d       	andi	r24, 0xDF	; 223
+ 132:	8c 93       	st	X, r24
+    }
+}
+ 134:	0f 90       	pop	r0
+ 136:	0f 90       	pop	r0
+ 138:	0f 90       	pop	r0
+ 13a:	0f 90       	pop	r0
+ 13c:	cf 91       	pop	r28
+ 13e:	df 91       	pop	r29
+ 140:	ff 91       	pop	r31
+ 142:	ef 91       	pop	r30
+ 144:	bf 91       	pop	r27
+ 146:	af 91       	pop	r26
+ 148:	9f 91       	pop	r25
+ 14a:	8f 91       	pop	r24
+ 14c:	0f 90       	pop	r0
+ 14e:	0f be       	out	0x3f, r0	; 63
+ 150:	0f 90       	pop	r0
+ 152:	1f 90       	pop	r1
+ 154:	18 95       	reti
+
+00000156 <_exit>:
+ 156:	f8 94       	cli
+
+00000158 <__stop_program>:
+ 158:	ff cf       	rjmp	.-2      	; 0x158 <__stop_program>

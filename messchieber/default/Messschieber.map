@@ -1,0 +1,446 @@
+Archive member included because of file (symbol)
+
+c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_exit.o)
+                              c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o (exit)
+c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_copy_data.o)
+                              Messschieber.o (__do_copy_data)
+c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_clear_bss.o)
+                              Messschieber.o (__do_clear_bss)
+c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(ltoa.o)
+                              Messschieber.o (ltoa)
+c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(strrev.o)
+                              c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(ltoa.o) (strrev)
+c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_udivmodsi4.o)
+                              c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(ltoa.o) (__udivmodsi4)
+
+Allocating common symbols
+Common symbol       size              file
+
+icpStartTime        0x2               ICP.o
+CaliperValue        0x4               Messschieber.o
+InpCnt              0x1               ICP.o
+CaliperUnit         0x1               Messschieber.o
+icpPeriod           0x2               ICP.o
+RS232_TxBuf         0x40              UartInterruptDriven.o
+buffer              0xa               Messschieber.o
+Input               0x4               ICP.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00002000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+LOAD Messschieber.o
+LOAD ICP.o
+LOAD UartInterruptDriven.o
+LOAD c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a
+LOAD c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a
+LOAD c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x3e6
+ *(.vectors)
+ .vectors       0x00000000       0x26 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x00000026       0x15 Messschieber.o
+                0x0000003c                . = ALIGN (0x2)
+ *fill*         0x0000003b        0x1 00
+                0x0000003c                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x0000003c        0x0 linker stubs
+ *(.trampolines*)
+                0x0000003c                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x0000003c                __ctors_start = .
+ *(.ctors)
+                0x0000003c                __ctors_end = .
+                0x0000003c                __dtors_start = .
+ *(.dtors)
+                0x0000003c                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x0000003c        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+                0x0000003c                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x0000003c        0x8 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000044       0x16 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_copy_data.o)
+                0x00000044                __do_copy_data
+ .init4         0x0000005a       0x10 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_clear_bss.o)
+                0x0000005a                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x0000006a        0x4 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+ *(.init9)
+ *(.text)
+ .text          0x0000006e        0x2 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+                0x0000006e                __vector_1
+                0x0000006e                __vector_12
+                0x0000006e                __bad_interrupt
+                0x0000006e                __vector_6
+                0x0000006e                __vector_11
+                0x0000006e                __vector_13
+                0x0000006e                __vector_17
+                0x0000006e                __vector_7
+                0x0000006e                __vector_5
+                0x0000006e                __vector_4
+                0x0000006e                __vector_9
+                0x0000006e                __vector_2
+                0x0000006e                __vector_15
+                0x0000006e                __vector_14
+                0x0000006e                __vector_10
+                0x0000006e                __vector_16
+                0x0000006e                __vector_18
+ .text          0x00000070       0x58 Messschieber.o
+                0x00000070                main
+ .text          0x000000c8      0x154 ICP.o
+                0x000000c8                __vector_3
+                0x0000020c                icpInit
+ .text          0x0000021c       0xfe UartInterruptDriven.o
+                0x000002a2                RS232XmitStr_P
+                0x000002c2                ClearRS232TxBuffer
+                0x0000021c                RS232Init
+                0x0000028a                RS232XmitStr
+                0x0000023c                RS232Xmit
+                0x00000260                XmitNibble
+                0x0000026c                RS232XmitHex
+                0x00000280                RS232XmitCrLf
+                0x000002cc                __vector_8
+ .text          0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_exit.o)
+ .text          0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_copy_data.o)
+ .text          0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_clear_bss.o)
+ .text          0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(ltoa.o)
+ .text          0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(strrev.o)
+ .text          0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_udivmodsi4.o)
+                0x0000031a                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_exit.o)
+ .text.libgcc   0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000031a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_clear_bss.o)
+ .text.avr-libc
+                0x0000031a       0x64 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(ltoa.o)
+                0x0000031a                ltoa
+ .text.avr-libc
+                0x0000037e       0x20 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(strrev.o)
+                0x0000037e                strrev
+ .text.libgcc   0x0000039e       0x44 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_udivmodsi4.o)
+                0x0000039e                __udivmodsi4
+                0x000003e2                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x000003e2        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_exit.o)
+                0x000003e2                exit
+                0x000003e2                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x000003e2        0x4 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_exit.o)
+ *(.fini0)
+                0x000003e6                _etext = .
+
+.data           0x00800060        0xa load address 0x000003e6
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+ .data          0x00800060        0xa Messschieber.o
+ .data          0x0080006a        0x0 ICP.o
+ .data          0x0080006a        0x0 UartInterruptDriven.o
+ .data          0x0080006a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_exit.o)
+ .data          0x0080006a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_copy_data.o)
+ .data          0x0080006a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_clear_bss.o)
+ .data          0x0080006a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(ltoa.o)
+ .data          0x0080006a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(strrev.o)
+ .data          0x0080006a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_udivmodsi4.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x0080006a                . = ALIGN (0x2)
+                0x0080006a                _edata = .
+                0x0080006a                PROVIDE (__data_end, .)
+
+.bss            0x0080006a       0x5a
+                0x0080006a                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x0080006a        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25/crttn2313.o
+ .bss           0x0080006a        0x0 Messschieber.o
+ .bss           0x0080006a        0x0 ICP.o
+ .bss           0x0080006a        0x2 UartInterruptDriven.o
+                0x0080006a                RS232_TxHead
+                0x0080006b                RS232_TxTail
+ .bss           0x0080006c        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_exit.o)
+ .bss           0x0080006c        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_copy_data.o)
+ .bss           0x0080006c        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_clear_bss.o)
+ .bss           0x0080006c        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(ltoa.o)
+ .bss           0x0080006c        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr25\libc.a(strrev.o)
+ .bss           0x0080006c        0x0 c:/develop/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr25\libgcc.a(_udivmodsi4.o)
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x0080006c        0xf Messschieber.o
+                0x0080006c                CaliperValue
+                0x00800070                CaliperUnit
+                0x00800071                buffer
+ COMMON         0x0080007b        0x9 ICP.o
+                0x0080007b                icpStartTime
+                0x0080007d                InpCnt
+                0x0080007e                icpPeriod
+                0x00800080                Input
+ COMMON         0x00800084       0x40 UartInterruptDriven.o
+                0x00800084                RS232_TxBuf
+                0x008000c4                PROVIDE (__bss_end, .)
+                0x000003e6                __data_load_start = LOADADDR (.data)
+                0x000003f0                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008000c4        0x0
+                0x008000c4                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008000c4                PROVIDE (__noinit_end, .)
+                0x008000c4                _end = .
+                0x008000c4                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0x60
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 Messschieber.o
+ .debug_aranges
+                0x00000020       0x20 ICP.o
+ .debug_aranges
+                0x00000040       0x20 UartInterruptDriven.o
+
+.debug_pubnames
+                0x00000000      0x1a5
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x47 Messschieber.o
+ .debug_pubnames
+                0x00000047       0x82 ICP.o
+ .debug_pubnames
+                0x000000c9       0xdc UartInterruptDriven.o
+
+.debug_info     0x00000000      0x51a
+ *(.debug_info)
+ .debug_info    0x00000000      0x13e Messschieber.o
+ .debug_info    0x0000013e      0x167 ICP.o
+ .debug_info    0x000002a5      0x275 UartInterruptDriven.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x282
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0xc2 Messschieber.o
+ .debug_abbrev  0x000000c2       0x99 ICP.o
+ .debug_abbrev  0x0000015b      0x127 UartInterruptDriven.o
+
+.debug_line     0x00000000      0x4bc
+ *(.debug_line)
+ .debug_line    0x00000000      0x125 Messschieber.o
+ .debug_line    0x00000125      0x164 ICP.o
+ .debug_line    0x00000289      0x233 UartInterruptDriven.o
+
+.debug_frame    0x00000000       0xf0
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x20 Messschieber.o
+ .debug_frame   0x00000020       0x30 ICP.o
+ .debug_frame   0x00000050       0xa0 UartInterruptDriven.o
+
+.debug_str      0x00000000      0x1f7
+ *(.debug_str)
+ .debug_str     0x00000000       0xbc Messschieber.o
+                                 0xfd (size before relaxing)
+ .debug_str     0x000000bc       0x56 ICP.o
+                                0x11f (size before relaxing)
+ .debug_str     0x00000112       0xe5 UartInterruptDriven.o
+                                0x192 (size before relaxing)
+
+.debug_loc      0x00000000      0x1e3
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x1e Messschieber.o
+ .debug_loc     0x0000001e       0x97 ICP.o
+ .debug_loc     0x000000b5      0x12e UartInterruptDriven.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(Messschieber.elf elf32-avr)
+LOAD linker stubs

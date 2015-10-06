@@ -1,0 +1,84 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <avr/pgmspace.h>
+
+// Sollte schon im Makefile definiert sein.
+// In dem Fall hier einfach löschen.
+#define F_CPU       7372800UL
+
+#define BAUD        19200UL
+#define UBRR_BAUD   ((F_CPU/(16UL*BAUD))-1)
+
+// Für die bessere Lesbarkeit
+#define TRUE    1
+#define FALSE   0
+
+
+volatile unsigned char daten_gesendet = TRUE;
+const prog_char* volatile p_string;
+
+// Zeichenkette im Flashspeicher
+prog_char daten[] = "Hello World!\n";
+
+
+// USART initialisieren
+void
+uart_init(void)
+{
+    // Baudrate einstellen ( Normaler Modus )
+    UBRRH = (unsigned char) (UBRR_BAUD>>8);
+    UBRRL = (unsigned char) (UBRR_BAUD & 0x0ff);
+
+    // oder einfacher:
+    // UBRR = UBRR_BAUD;
+
+    // Aktivieren des Empfängers, des Senders und des "Daten empfangen"-Interrupts
+    UCSRB = (1<<RXEN)|(1<<TXEN);
+
+    // Einstellen des Datenformats: 8 Datenbits, 1 Stoppbit
+    UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);
+}
+
+int
+main(void)
+{
+    // USART initialisieren
+    uart_init();
+
+    sei();
+
+    while (1)
+    {
+        if (daten_gesendet)
+        {
+            // Flag zurücksetzen
+            daten_gesendet = FALSE;
+
+            // Pointer zeigt auf die Daten im Flashspeicher
+            p_string = daten;
+
+            /* Interrupt aktivieren, damit wird sofort zur
+               Interruptroutine gesprungen und das erste Zeichen gesendet. */
+            UCSRB |= (1<<UDRIE);
+        }
+    }
+}
+
+// Interrupt wird ausgelöst sobald der Sendepuffer leer ist
+ISR(USART_UDRE_vect)
+{
+    char buffer = pgm_read_byte(p_string++);
+
+    /* Wenn nicht das Ende der Zeichenkette erreicht wurde,
+       dann weiteres Zeichen senden */
+    if ( buffer != '\0' ) {
+        UDR = buffer;
+
+    } else {
+        // Flag setzen, das der String gesendet wurde
+        daten_gesendet = TRUE;
+
+        // Interrupt deaktivieren
+        UCSRB &= ~(1<<UDRIE);
+    }
+}

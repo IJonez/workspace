@@ -1,0 +1,43 @@
+/*
+ * main.c
+ *blinks on flank of calipher
+ *
+ *  Created on: 03.10.2015
+ *      Author: db2442s
+ */
+
+#include <avr/io.h>
+#include <stdint.h>
+
+uint_8 ms_sclk;
+uint_8 ms_sclk_last;
+
+
+int main (void)
+{
+
+	ms_slk = 0
+	ms_sclk_last = 0
+	DDRD |= (1 << PD6);
+	DDRB = 0Xff; 		// sets Port B as input (ff = 11111111)
+	PORTB = 0x03; 		//  sets pin 0 and 1 as "1" (03 = 11)
+	DDRD = 0xff;
+
+
+	while(1)
+			{
+			ms_sclk = PIND & (1<<PD7);  // Signal sclk einlesen
+
+			if (    ms_sclk    != 0 && ms_sclk_last == 0    )  // pos Flanke
+			{
+
+
+					PORTD |= (1 << PD6);
+					_delay_ms(1000);
+					PORTD &= ~(1 << PD6);
+						_delay_ms(100);
+
+					}
+			}
+	return 0;
+}

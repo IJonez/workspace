@@ -1,0 +1,37 @@
+#include <avr/io.h>
+#include <stdint.h>
+
+uint32_t ms_data;
+uint8_t  u8Sample;
+uint8_t  u8SampleLast
+
+int main(void)
+	{
+	DDRB = 0Xff; \\ sets Port B as input (ff = 11111111)
+	PORTB = 0x03; \\ sets pin 0 and 1 as "1" (03 = 11)
+	DDRD = 0xff;
+	
+	
+	
+	while(1)
+		{
+				
+		_u8Sample = PIND & (1<<PD7);  // Signal einlesen
+
+		if (    u8Sample     != 0 
+		     && u8SampleLast == 0    )
+		{
+		  // pos Flanke
+		}
+		if (    u8Sample     == 0 
+		     && u8SampleLast != 0    )
+		{
+		  // neg Flanke
+		}
+		u8SampleLast = u8Sample;
+				
+		
+		\\Nothing
+		}
+	return 0;
+	}

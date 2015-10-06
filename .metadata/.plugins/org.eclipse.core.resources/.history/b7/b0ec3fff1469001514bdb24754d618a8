@@ -1,0 +1,33 @@
+/*
+ * button.c
+
+ *
+ *  Created on: 02.10.2015
+ *      Author: db2442s
+ */
+
+#include <avr/io.h>
+#include <stdint.h>
+#include <util/delay.h>
+
+int main(void)
+	{
+	DDRD = 0b11111110; 		//  sets pin 0 and 1 as "1" (03 = 11)
+
+	while(1)
+		{
+
+
+		if (PIND & (1<<PD7))  //Button gedrückt
+		{
+			PORTD |= (1<<PD6);
+			_delay_ms(1000);
+			PORTD |= (0<<PD6);
+		}
+
+		}
+	return 0;
+	}
+
+
+

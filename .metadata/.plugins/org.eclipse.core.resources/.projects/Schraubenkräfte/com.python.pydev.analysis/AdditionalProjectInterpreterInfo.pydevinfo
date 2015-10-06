@@ -1,0 +1,19 @@
+-- VERSION_4
+-- START DISKCACHE_2
+C:\Users\db2442s\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\Schraubenkräfte\com.python.pydev.analysis\v2_indexcache
+Zusbau|1443168114289829000|C:\Users\db2442s\workspace\Schraubenkräfte\Zusbau.py
+-- END DISKCACHE
+-- START DICTIONARY
+1
+1=Zusbau
+-- END DICTIONARY
+-- START TREE 1
+4
+ads|1|ADS_M!10@
+pwm|1|pwm!10@
+t_a|2|t_ADS_M!11@t_ADS_F!11@
+t_p|1|t_pwm!11@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE
