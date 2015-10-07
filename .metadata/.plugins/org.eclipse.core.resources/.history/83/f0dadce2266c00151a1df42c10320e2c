@@ -6,7 +6,7 @@
 // In dem Fall hier einfach löschen.
 
 
-#define BAUD        115UL
+#define BAUD        19200UL
 #define UBRR_BAUD   ((F_CPU/(16UL*BAUD))-1)
 
 // Für die bessere Lesbarkeit
